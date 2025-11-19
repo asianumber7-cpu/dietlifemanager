@@ -1,0 +1,19 @@
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
+
+def test_create_user():
+    response = client.post(
+        "/api/v1/users/",
+        json={"email": "test@example.com", "password": "secret", "name": "Test User"},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["email"] == "test@example.com"
+    assert "id" in data
+
+def test_read_main():
+    response = client.get("/")
+    assert response.status_code == 200
+    assert response.json() == {"message": "Diet & Life Manager API is running", "version": "1.0.0"}
