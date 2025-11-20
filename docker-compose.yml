@@ -5,8 +5,12 @@ services:
   backend:
     build: ./backend
     container_name: diet_backend
+    restart: always
     ports:
       - "8000:8000"
+    env_file:
+      - ./backend/.env
+
     volumes:
       - ./backend:/app  # 코드 수정 시 실시간 반영 (Hot Reload)
     environment:

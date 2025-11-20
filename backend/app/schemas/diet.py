@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from enum import Enum
+from datetime import datetime
 
 # 활동량 레벨을 미리 정의 (오타 방지 및 명확성)
 class ActivityLevel(str, Enum):
@@ -25,3 +26,14 @@ class DietOutput(BaseModel):
     tdee: float             # 하루 총 에너지 소비량 (유지 칼로리)
     recommend_calories: float # 다이어트 추천 칼로리
     advice: str             # AI의 조언 메시지
+
+
+
+# [새로 추가] DB에 저장된 기록을 보여줄 때 쓰는 양식
+# DietInput(입력값) + DietOutput(결과값) + ID/시간 정보를 모두 합칩니다.
+class DietLog(DietInput, DietOutput):
+    id: int
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

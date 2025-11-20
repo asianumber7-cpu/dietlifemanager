@@ -6,3 +6,4 @@ pydantic==2.5.2
 pydantic-settings==2.1.0
 pytest==7.4.3           # 테스트용
 httpx==0.25.1           # 테스트 클라이언트용
+ibm-watson-machine-learning
